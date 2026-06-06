@@ -6,60 +6,58 @@
     <title>TALON: The Last Holder</title>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
     <style>
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background: #000; 
-            color: #fff; 
-            text-align: center; 
-            padding: 50px 20px; 
-        }
+        body { font-family: sans-serif; background: #000; color: #fff; text-align: center; padding: 50px 20px; }
         h1 { color: #f9d423; }
-        #king { font-weight: bold; color: #00ffcc; word-break: break-all; }
-        button { 
+        #king { font-weight: bold; color: #00ffcc; }
+        
+        /* Bouton bien visible et brillant */
+        #payButton { 
             margin-top: 30px;
-            padding: 15px 30px; 
-            font-size: 18px; 
+            padding: 20px 40px; 
+            font-size: 20px; 
             cursor: pointer; 
-            background: #333; 
-            color: white; 
-            border: 1px solid #555; 
-            border-radius: 8px;
+            background: #f9d423; /* Jaune Talon */
+            color: #000; 
+            font-weight: bold;
+            border: none; 
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(249, 212, 35, 0.4);
         }
-        button:hover { background: #444; }
+        #payButton:active { transform: scale(0.98); }
     </style>
 </head>
 <body>
     <h1>TALON: The Last Holder</h1>
-    <p>Le Roi actuel : <span id="king">Chargement...</span></p>
-    <button id="payButton">Devenir le Roi (0.001 ETH)</button>
+    <p>Le Roi actuel : <span id="king">En attente...</span></p>
+    <button id="payButton">DEVENIR LE ROI (0.001 ETH)</button>
 
     <script>
-        // Votre adresse intégrée
         const TREASURY_ADDRESS = "0x872bD846596Cc1aEde8Fd800997d242e3473fA83";
         
-        document.getElementById('payButton').addEventListener('click', async () => {
-            if (!window.ethereum) return alert("Veuillez installer MetaMask ou utiliser un navigateur avec wallet intégré.");
+        document.getElementById('payButton').onclick = async () => {
+            if (!window.ethereum) return alert("Installez MetaMask ou utilisez le navigateur de votre wallet.");
             
             try {
-                // Demander la connexion au wallet
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 await provider.send("eth_requestAccounts", []);
                 const signer = provider.getSigner();
 
-                // Préparation de la transaction
+                // Notification avant transaction
+                alert("Ouverture du wallet pour la transaction...");
+
                 const tx = await signer.sendTransaction({
                     to: TREASURY_ADDRESS,
-                    value: ethers.utils.parseEther("0.001") // Prix du ticket en ETH
+                    value: ethers.utils.parseEther("0.001")
                 });
 
-                alert("Transaction envoyée ! Attendez la confirmation sur la blockchain.");
+                alert("Transaction envoyée ! Attendez la confirmation.");
                 await tx.wait();
-                alert("Succès ! Votre participation est enregistrée.");
+                alert("Succès ! Vous êtes en lice.");
             } catch (error) {
-                console.error("Erreur :", error);
-                alert("Erreur lors de la transaction : " + (error.message || error));
+                console.error(error);
+                alert("Erreur : " + (error.message || "Action annulée"));
             }
-        });
+        };
     </script>
 </body>
 </html>
