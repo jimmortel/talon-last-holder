@@ -13,18 +13,16 @@
         }
         h1 { color: #f9d423; font-size: 28px; margin: 10px 0; }
         .avatar { width: 150px; height: 150px; border-radius: 50%; border: 3px solid #f9d423; margin-bottom: 20px; object-fit: cover; }
-        .description { color: #888; font-size: 14px; margin: 20px 0; max-width: 300px; line-height: 1.4; }
+        .description { color: #ccc; font-size: 15px; margin: 20px 0; max-width: 300px; line-height: 1.5; }
+        .highlight { color: #f9d423; font-weight: bold; }
         .btn { 
             display: inline-block; padding: 18px 0; font-size: 18px; 
             background: #f9d423; color: #000; font-weight: bold; text-decoration: none; 
             border-radius: 12px; width: 100%; max-width: 320px;
             box-shadow: 0 4px 15px rgba(249, 212, 35, 0.3);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
-        .btn-secondary { 
-            background: transparent; color: #f9d423; border: 1px solid #f9d423;
-            padding: 12px 0; font-size: 14px; margin-top: 10px;
-        }
+        .btn-secondary { background: transparent; color: #f9d423; border: 1px solid #f9d423; padding: 12px 0; font-size: 14px; }
     </style>
 </head>
 <body>
@@ -37,9 +35,10 @@
         BECOME THE KING (0.001 ETH)
     </a>
 
-    <p class="description">
-        Each entry contributes to the liquidity pool for $TALON.
-    </p>
+    <div class="description">
+        <p>The <span class="highlight">Last Holder</span> takes the crown and a share of the pool!</p>
+        <p>Every entry boosts the <span class="highlight">$TALON liquidity pool</span>.</p>
+    </div>
 
     <a href="https://eagle-nest-eight.vercel.app/" class="btn btn-secondary">
         Go to Claim App
