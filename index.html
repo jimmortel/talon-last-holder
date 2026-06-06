@@ -2,53 +2,23 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TALON: The Last Holder</title>
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
     <style>
         body { font-family: sans-serif; background: #000; color: #fff; text-align: center; padding: 50px 20px; }
-        #payButton { 
-            margin-top: 30px; padding: 20px 40px; font-size: 20px; cursor: pointer; 
-            background: #f9d423; color: #000; font-weight: bold; border: none; border-radius: 12px;
+        .btn { 
+            display: inline-block; margin-top: 30px; padding: 20px 40px; font-size: 20px; 
+            background: #f9d423; color: #000; font-weight: bold; text-decoration: none; border-radius: 12px;
         }
     </style>
 </head>
 <body>
     <h1>TALON: The Last Holder</h1>
-    <button id="payButton">DEVENIR LE ROI (0.001 ETH)</button>
-
-    <script>
-        const TREASURY_ADDRESS = "0x872bD846596Cc1aEde8Fd800997d242e3473fA83";
-        
-        async function connectAndPay() {
-            if (typeof window.ethereum === 'undefined') {
-                return alert("Veuillez utiliser le navigateur intégré de votre wallet (MetaMask/Coinbase).");
-            }
-
-            try {
-                // 1. Demander la connexion au wallet
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
-                
-                // 2. Initialiser le provider
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                const signer = provider.getSigner();
-
-                // 3. Envoyer la transaction
-                const tx = await signer.sendTransaction({
-                    to: TREASURY_ADDRESS,
-                    value: ethers.utils.parseEther("0.001")
-                });
-
-                alert("Transaction envoyée !");
-                await tx.wait();
-                alert("Bravo ! Vous êtes le nouveau Roi.");
-            } catch (error) {
-                console.error(error);
-                alert("Erreur : " + (error.message || "Action annulée"));
-            }
-        }
-
-        document.getElementById('payButton').addEventListener('click', connectAndPay);
-    </script>
+    <p>Le Roi actuel : En attente...</p>
+    <a href="ethereum:0x872bD846596Cc1aEde8Fd800997d242e3473fA83?value=1000000000000000" class="btn">
+        DEVENIR LE ROI (0.001 ETH)
+    </a>
+    <p style="margin-top: 20px; font-size: 12px; color: #666;">
+        Si le bouton ne s'ouvre pas, copiez l'adresse : 0x872bD846596Cc1aEde8Fd800997d242e3473fA83
+    </p>
 </body>
 </html>
